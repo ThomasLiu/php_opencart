@@ -82,7 +82,7 @@ $ yum -y install php70w.x86_64 php70w-cli.x86_64 php70w-common.x86_64 php70w-gd.
 $ yum install php70w-fpm
 ```
 
-
+---
 
 
 backup.sh
