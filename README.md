@@ -77,7 +77,7 @@ $ yum -y install php70w.x86_64 php70w-cli.x86_64 php70w-common.x86_64 php70w-gd.
 ```
 这里建议直接安装php 7.0 吧，装5.6会有依赖包版本问题。
 
-安装PHP FPM
+安装[PHP FPM](https://www.cnblogs.com/followyou/p/9460058.html)
 ```
 $ yum install php70w-fpm
 ```
