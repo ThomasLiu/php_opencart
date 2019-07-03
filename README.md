@@ -73,7 +73,7 @@ ServerName localhost:80
 安装php
 ```
 $ rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm 
-$ yum -y install php70w.x86_64 php70w-cli.x86_64 php70w-common.x86_64 php70w-gd.x86_64 php70w-ldap.x86_64 php70w-mbstring.x86_64 php70w-mysql.x86_64 php70w-pdo.x86_64 php70w-pear.noarch php70w-process.x86_64 php70w-xml.x86_64 php70w-xmlrpc.x86_64 
+$ yum -y install php70w.x86_64 php70w-cli.x86_64 php70w-common.x86_64 php70w-gd.x86_64 php70w-ldap.x86_64 php70w-mbstring.x86_64 php70w-mysql.x86_64 php70w-pdo.x86_64 php70w-pear.noarch php70w-process.x86_64 php70w-xml.x86_64 php70w-xmlrpc.x86_64 php70w-mcrypt.x86_64
 ```
 这里建议直接安装php 7.0 吧，装5.6会有依赖包版本问题。
 
