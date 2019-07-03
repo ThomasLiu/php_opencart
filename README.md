@@ -2,9 +2,9 @@
 
 
 ### 环境搭建
-在linux centos上可以使用 yum来安装，但是yum 安装的apache、php他们的默认版本是apache2.4和php5.4 
+在linux centos上可以使用 yum来安装，但是yum 安装的apache、php他们的默认版本是apache2.4和php5.4，如果需要使用vQmod的话，需要php5.6以上的版本
 
-安装之前先检查一下系统是否有默认安装的apache或者php
+所以安装之前先检查一下系统是否有默认安装的apache或者php
 ```
 $ rpm -qa | grep httpd 
 $ rpm -qa | frep php
