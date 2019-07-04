@@ -100,11 +100,24 @@ $ cp -rf  ~/opencart/vendor/ /var/www/
 $ systemctl restart httpd
 ```
 
-浏览器输入服务器ip地址进入页面安装 ip/install
+浏览器输入服务器ip地址进入页面安装 http://ip/install
 
 填写前面设置的数据库名opencartdb，以及用户名和密码（opencart/opencart）
 
 安装 vqmod
+```
+$ rm -rf ~/vqmod
+$ mkdir vqmod && cd vqmod
+$ wget https://github.com/vqmod/vqmod/archive/v2.6.4-opencart.zip
+$ unzip -q v2.6.4-opencart.zip
+
+$ cp -rf ~/vqmod/vqmod-2.6.4-opencart/vqmod /var/www/html/;
+$ chmod a+w /var/www/html/admin/index.php;
+$ chmod a+w /var/www/html/index.php;
+$ chmod a+w /var/www/html/vqmod -R;
+$ systemctl restart httpd;
+```
+浏览器输入服务器ip地址进入页面安装 http://ip/vqmod/install/
 
 ---
 
