@@ -147,12 +147,10 @@ mkdir vqmod && cd vqmod
 wget https://github.com/vqmod/vqmod/archive/v2.6.4-opencart.zip
 unzip -q v2.6.4-opencart.zip
 
-cp -rf ~/vqmod /var/www/html/;
-chmod a+w /var/www/html/admin/index.php -R;
-chmod a+w /var/www/html/index.php -R;
-chmod 777 /var/www/html/vqmod -R;
-chmod 755 /var/www/html/admin/config.php -R;
-chmod 755 /var/www/html/config.php -R;
+cp -rf ~/vqmod/vqmod-2.6.4-opencart/vqmod /var/www/html/;
+chmod a+w /var/www/html/admin/index.php;
+chmod a+w /var/www/html/index.php;
+chmod a+w /var/www/html/vqmod -R;
 systemctl restart httpd;
 
 echo install finish
