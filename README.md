@@ -141,8 +141,13 @@ install_vqmod.sh
 # install_vqmod.sh 
 
 echo install vqmod start;
+cd ~
+rm -rf ~/vqmod
+mkdir vqmod && cd vqmod
+wget https://github.com/vqmod/vqmod/archive/v2.6.4-opencart.zip
+unzip -q v2.6.4-opencart.zip
 
-cp -rf vqmod /var/www/html/;
+cp -rf ~/vqmod /var/www/html/;
 chmod a+w /var/www/html/admin/index.php -R;
 chmod a+w /var/www/html/index.php -R;
 chmod 777 /var/www/html/vqmod -R;
