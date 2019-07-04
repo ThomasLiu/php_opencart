@@ -82,6 +82,30 @@ $ yum -y install php70w.x86_64 php70w-cli.x86_64 php70w-common.x86_64 php70w-gd.
 $ yum install php70w-fpm
 ```
 
+安装opencart 
+```
+$ cd ~
+$ mkdir opencart && cd opencart
+$ wget https://github.com/opencart/opencart/releases/download/2.3.0.2/2.3.0.2-compiled.zip
+$ unzip -q 2.3.0.2-compiled.zip
+$ rm -rf /var/www/html/
+$ mkdir /var/www/html/
+$ cp -rf ~/opencart/upload/* /var/www/html/
+$ mv /var/www/html/config-dist.php /var/www/html/config.php
+$ mv /var/www/html/admin/config-dist.php /var/www/html/admin/config.php
+$ chmod a+w /var/www/html/config.php /var/www/html/admin/config.php
+$ chmod a+w /var/www/html/image/ -R
+$ chmod a+w /var/www/html/system/ -R
+$ cp -rf  ~/opencart/vendor/ /var/www/
+$ systemctl restart httpd
+```
+
+浏览器输入服务器ip地址进入页面安装 ip/install
+
+填写前面设置的数据库名opencartdb，以及用户名和密码（opencart/opencart）
+
+安装 vqmod
+
 ---
 
 
