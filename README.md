@@ -108,6 +108,51 @@ $ systemctl restart httpd
 
 ---
 
+install_opencart.sh
+```
+#!/bin/bash
+# install_opencart.sh
+
+echo install opencart start
+cd ~
+rm -rf ~/opencart
+mkdir opencart && cd opencart
+wget https://github.com/opencart/opencart/releases/download/2.3.0.2/2.3.0.2-compiled.zip
+unzip -q 2.3.0.2-compiled.zip
+
+rm -rf /var/www/html/
+mkdir /var/www/html/
+cp -rf ~/opencart/upload/* /var/www/html/
+mv /var/www/html/config-dist.php /var/www/html/config.php
+mv /var/www/html/admin/config-dist.php /var/www/html/admin/config.php
+chmod a+w /var/www/html/config.php /var/www/html/admin/config.php
+chmod a+w /var/www/html/image/ -R
+chmod a+w /var/www/html/system/ -R
+cp -rf  ~/opencart/vendor/ /var/www/
+systemctl restart httpd
+
+echo install finish
+```
+
+
+install_vqmod.sh 
+```
+#! /bin/bash
+# install_vqmod.sh 
+
+echo install vqmod start;
+
+cp -rf vqmod /var/www/html/;
+chmod a+w /var/www/html/admin/index.php -R;
+chmod a+w /var/www/html/index.php -R;
+chmod 777 /var/www/html/vqmod -R;
+chmod 755 /var/www/html/admin/config.php -R;
+chmod 755 /var/www/html/config.php -R;
+systemctl restart httpd;
+
+echo install finish
+```
+
 
 backup.sh
 ```
