@@ -41,6 +41,7 @@ $ systemctl enable httpd
 
 现在去浏览器中输入的服务器的ip，正常情况你是访问不了的，因为有防火墙默认是没有对80端口开启的，所以现在要去开放防火墙对80端口开放
 ```
+$ systemctl stop firewalld && systemctl disable firewalld ## 取消firewalld服务
 $ yum install iptables-services # 安装iptables防火墙 
 $ vi /etc/sysconfig/iptables # 修改配置 
 ```
@@ -53,7 +54,7 @@ $ vi /etc/sysconfig/iptables # 修改配置
 
 重启防火墙
 ```
-$ systemctl restart firewalld.service
+$ systemctl start iptables && systemctl enable iptables
 ```
 
 现在再去访问，如果成功了 那ok 要上还是不行,去改httpd.conf的配置
