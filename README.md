@@ -49,6 +49,7 @@ $ vi /etc/sysconfig/iptables # 修改配置
 把这两条规则保存到打开的配置文件里面，注意：要放在20端口下面 
 ```
 -A INPUT -m state –state NEW -m tcp -p tcp –dport 21 -j ACCEPT # 允许21端口通过防火墙 给ftp
+-A INPUT -m state –state NEW -m tcp -p tcp –dport 21 -j ACCEPT # 允许22端口通过防火墙 给ssh
 -A INPUT -m state –state NEW -m tcp -p tcp –dport 80 -j ACCEPT # 允许80端口通过防火墙
 -A INPUT -m state –state NEW -m tcp -p tcp –dport 443 -j ACCEPT # 允许443端口通过防火墙 给 ssl https
 -A INPUT -m state –state NEW -m tcp -p tcp –dport 3306 -j ACCEPT # 允许3306端口通过防火墙 给 外网链接数据库 如果是分离的话可以忽略
