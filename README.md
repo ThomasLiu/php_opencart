@@ -48,8 +48,10 @@ $ vi /etc/sysconfig/iptables # 修改配置
 
 把这两条规则保存到打开的配置文件里面，注意：要放在20端口下面 
 ```
--A INPUT -m state –state NEW -m tcp -p tcp –dport 80 -j ACCEPT # 允许80端口通过防火墙 1 
--A INPUT -m state –state NEW -m tcp -p tcp –dport 3306 -j ACCEPT # 允许3306端口通过防火墙 2 
+-A INPUT -m state –state NEW -m tcp -p tcp –dport 21 -j ACCEPT # 允许21端口通过防火墙 给ftp
+-A INPUT -m state –state NEW -m tcp -p tcp –dport 80 -j ACCEPT # 允许80端口通过防火墙
+-A INPUT -m state –state NEW -m tcp -p tcp –dport 443 -j ACCEPT # 允许443端口通过防火墙 给 ssl https
+-A INPUT -m state –state NEW -m tcp -p tcp –dport 3306 -j ACCEPT # 允许3306端口通过防火墙 给 外网链接数据库 如果是分离的话可以忽略
 ```
 
 重启防火墙
@@ -70,6 +72,65 @@ $ vi /etc/httpd/conf/httpd.conf #根据上面find到的具体路径
 ServerName localhost:80
 ```
 现在去访问不出意外应该会出现 is work 页面
+
+
+安装ssl 模块
+```
+$ yum list all mod_ssl
+$ yum install -y mod_ssl
+```
+
+安装 Let's Encrypt 证书
+```
+$ pip uninstall requests
+$ pip uninstall urllib3
+$ yum remove python-urllib3 python-requests -y
+$ yum install certbot -y
+```
+
+把httpd先停掉
+```
+$ systemctl stop httpd
+```
+
+生成证书
+```
+$ certbot certonly --standalone -d www.example.comwe # www.example.com 为你实际的域名 如果多个域名就空格继续填就好了
+```
+根据提示操作，给一个接收通知的邮箱，然后其他都Agree就OK了。
+
+证书生成完毕后，可以在 /etc/letsencrypt/live/ 目录下看到对应域名的文件夹找到证书。
+
+修改 ssl 的配置 
+```
+$ vim /etc/httpd/conf.d/ssl.conf
+
+# 取消以下注释：
+DocumentRoot "/var/www/html/"
+ServerName www.example.com:443 #这里换成你自己的域名
+
+# 再找出以下几个属性改成对应的证书路径
+SSLCertificateFile /etc/letsencrypt/live/www.example.com/cert.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/www.example.com/privkey.pem
+SSLCertificateChainFile /etc/letsencrypt/live/www.example.com/chain.pem
+```
+
+再启动 httpd 就可以 https 访问了
+```
+$ systemctl start httpd
+```
+
+由于Let’s Encrypt提供的证书只有90天的有效期，必须在证书到期之前，重新获取这些证书，所以设置一个定时任务，每隔两个月凌晨四点进行证书更新，并先行停止httpd服务，之后再开启。
+```
+$ vi /etc/crontab 
+
+# 加入以下代码
+0 4 * */2 * certbot renew --pre-hook "systemctl stop httpd" --post-hook "systemctl start httpd"
+```
+保存后 刷新定时任务配置
+```
+$ crontab /etc/crontab
+```
 
 安装php
 ```
